@@ -26,6 +26,11 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get 'index' do
+    @posts = Post.all
+    erb :index
+  end
+
   get '/posts' do
     @posts = Post.all
     erb :index
@@ -36,12 +41,16 @@ class ApplicationController < Sinatra::Base
     erb :show
   end
 
-  get '/show' do
+  get '/posts/:id/edit' do
+    erb :edit
+  end
+
+  delete '/posts/:id/delete' do
     erb :show
   end
 
-  get 'index' do
-    erb :index
+  get '/show' do
+    erb :show
   end
 
 end
