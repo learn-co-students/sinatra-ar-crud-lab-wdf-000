@@ -7,16 +7,41 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/' do 
-    erb :index
-  end
+  # get '/' do 
+  #   @posts = Post.all
+  #   erb :index
+  # end
 
   get '/posts/new' do
     erb :new
   end
 
   post '/posts' do
-    # saves a post to database
-    erb :posts
+    # process and save a post to database
+    @post = Post.create do |field|
+      field.name = "#{params[:name]}"
+      field.content = "#{params[:content]}"
+    end
+    @post.save
+    erb :index
   end
+
+  get '/posts' do
+    @posts = Post.all
+    erb :index
+  end
+
+  get '/posts/:id' do
+    @post = Post.find_by(id: params[:id])
+    erb :show
+  end
+
+  get '/show' do
+    erb :show
+  end
+
+  get 'index' do
+    erb :index
+  end
+
 end
