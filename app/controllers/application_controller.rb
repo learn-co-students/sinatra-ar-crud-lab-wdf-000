@@ -7,35 +7,21 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  # get '/' do 
-  #   @posts = Post.all
-  #   erb :index
-  # end
-
   get '/posts/new' do
     erb :new
   end
 
   post '/posts' do
     # process and save a post to database
-    # Should move the creation and saving to models?
-    @post = Post.create do |field|
-      field.name = params[:post][:name]
-      field.content = params[:post][:content]
-    end
-    @post.save
-    # @posts = Post.all
-    erb :index
+    @post = Post.create_post(params[:post])
+    @posts = Post.all
+    erb :posts
   end
 
   get '/posts' do
     @posts = Post.all
-    erb :index
-  end
-
-  get '/index' do
-    @posts = Post.all
-    erb :index
+    # binding.pry
+    erb :posts
   end
 
   get '/posts/:id' do
@@ -50,22 +36,17 @@ class ApplicationController < Sinatra::Base
 
   patch '/posts/:id' do
     @post = Post.find_by(id: params[:id])
-    @post.name = params[:post][:name]
-    @post.content = params[:post][:content]
+    @post.update(params[:post])
     @post.save
     erb :show
   end
 
   delete '/posts/:id/delete' do
     @post = Post.find_by(id: params[:id])
-    @message = "#{@post[:name]} was deleted"
     @post.destroy
-    # binding.pry
-    erb :show
-  end
-
-  get '/show' do
-    erb :show
+    @delete_message = "#{@post[:name]} was deleted"
+    @posts = Post.all
+    erb :posts
   end
 
 end
