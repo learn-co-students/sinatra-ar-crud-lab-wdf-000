@@ -1,0 +1,16 @@
+<h1>Welcome to the Sinatra Ar Crud Lab</h1>
+
+<% if @delete_message %>
+  <p style="font-size: 28px; color: red"><%= @delete_message %></p>
+<% end %>
+
+<a href="/posts/new">To Create a new post click here</a>
+
+<h2>Latest Posts: </h2>
+
+<% @posts.each do |post| %>
+  <h3><%= post.name  %></h3>
+  <hr>
+  <p><%= post.content %></p>
+  <p></p>
+<% end %>
