@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-  <% @posts.each do |post| %>
-    <h2><%= post.name %></h2>
-  <% end %>
+  <h2><%= @post.name %></h2>
+  <p><%= @post.content %></p>
 </body>
 </html>
