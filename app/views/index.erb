@@ -1,0 +1,9 @@
+<%@posts.each do |post|%>
+
+<h2><%=post.name%></h2>
+<p><%=post.content%></p>
+
+<%end%>
+<%if !@session[:deleted_post].nil?%>
+  <h3>Post titled <%=@session[:deleted_post]%> was deleted</h3>
+<%end%>
