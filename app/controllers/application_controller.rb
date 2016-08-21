@@ -11,43 +11,40 @@ class ApplicationController < Sinatra::Base
     
   end
 
-  get '/posts/new' do
+  get '/posts/new' do #loads new form
     erb :new
   end
 
-  post '/posts' do
+  post '/posts' do #creates a post
     Post.create(params)
-    # @posts = Post.all
-    # erb :index
     redirect '/posts'
   end
 
-  get '/posts' do
+  get '/posts' do #loads index page
     @posts = Post.all
     erb :index
   end
 
-  get '/posts/:id' do
-    @post = Post.find(params[:id])
+  get '/posts/:id' do #loads show page
+    @post = Post.find_by_id(params[:id])
     erb :show
   end
 
-  get '/posts/:id/edit' do
+  get '/posts/:id/edit' do #loads edit form
     @post = Post.find(params[:id])
     erb :edit
   end
 
-  patch '/posts/:id' do
-    @post = Post.find(params[:id])
+  patch '/posts/:id' do #updates a post
+    @post = Post.find_by_id(params[:id])
     @post.update(name: params[:name], content: params[:content])
     # redirect 'posts/:id'
     erb :show
   end
 
-  delete '/posts/:id/delete' do
-    post = Post.find(params[:id])
-    @last = post.name
-    post.destroy
+  delete '/posts/:id/delete' do #delete action
+    @post = Post.find_by_id(params[:id])
+    @post.delete
 
     erb :deleted
   end
