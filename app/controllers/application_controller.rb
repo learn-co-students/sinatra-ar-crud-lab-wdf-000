@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
       p.name = params[:name]
       p.content = params[:content]
     end
-    erb :index
+    redirect '/posts'
   end
 
   get '/posts' do
