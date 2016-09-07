@@ -1,4 +1,6 @@
 source 'http://rubygems.org'
+require 'capybara'
+require 'capybara/dsl'
 
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
