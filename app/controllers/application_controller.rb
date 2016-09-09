@@ -15,10 +15,11 @@ class ApplicationController < Sinatra::Base
   get '/posts/new' do 
   	erb :new
   end
-
+# this is a get request and the user visits this page and renders the form which is in the new template 
   post '/posts' do 
-  	@post = Post.create(params)
-  	redirect '/posts'
+    Post.create(params) #This creates a new post
+  	# @post = Post.create(params)
+  	redirect '/posts' #this is submitting a get request... when you redirect you lose scope and therefore the variable
   end
 
   get '/posts' do
