@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<h1>All Posts</h1>
+
+<% if @message %>
+  <%= @message %>
+    <% end %>
+
+<% @posts.each do |x| %>
+    <h2>Author: <%= x.name %></h2>
+    <p><%= x.content %></p>
+    <% end %>
